@@ -22,12 +22,12 @@ export type UpdateTaskModel = {
 };
 
 export type UpdateTaskDomainModel = {
-  title?: string;
-  description?: string;
   status?: TaskStatus;
+  title?: string;
+  deadline?: string | null;
+  description?: string | null;
   priority?: TaskPriority;
-  startDate?: string;
-  deadline?: string;
+  startDate?: string | null;
 };
 
 export type GetTaskResponse = {

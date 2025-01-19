@@ -248,29 +248,27 @@ export const updateTaskTC =
     const tasks = state.tasks;
     const tasksForTodolist = tasks[payload.todolistId];
     const task = tasksForTodolist.find((el) => el.id === payload.taskId);
-
-    if (task) {
-      const model: UpdateTaskDomainModel = {
-        title: payload.domainModel.title || task.title,
-        status:
-          payload.domainModel.status !== undefined
-            ? payload.domainModel.status
-            : task.status,
-        deadline: payload.domainModel.deadline,
-        description: payload.domainModel.description,
-        priority: payload.domainModel.priority,
-        startDate: payload.domainModel.startDate,
-      };
-      taskApi
-        .updateTask({
-          todolistId: task.todoListId,
-          taskId: task.id,
-          model: model,
-        })
-        .then(() => {
-          dispatch(updateTaskAC(payload));
-        });
+    if (!task) {
+      console.warn("task not found");
+      return;
     }
+    const model: UpdateTaskDomainModel = {
+      title: task.title,
+      status: task.status,
+      deadline: task.deadline,
+      description: task.description,
+      priority: task.priority,
+      startDate: task.startDate,
+      ...payload.domainModel,
+    };
+
+    taskApi
+      .updateTask({
+        todolistId: task.todoListId,
+        taskId: task.id,
+        model: model,
+      })
+      .then(() => dispatch(updateTaskAC(payload)));
   };
 
 // Actions types
