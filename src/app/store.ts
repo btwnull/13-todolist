@@ -8,9 +8,11 @@ import { tasksReducer } from "../features/todolists/model/tasks-reducer";
 import { todolistsReducer } from "../features/todolists/model/todolists-reducer";
 import { appReducer } from "./app-reducer";
 import { thunk, type ThunkDispatch } from "redux-thunk";
+import { authReducer } from "features/auth/model/authReducer";
 
 const rootReducer = combineReducers({
   tasks: tasksReducer,
+  auth: authReducer,
   todolists: todolistsReducer,
   app: appReducer,
 });

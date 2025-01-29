@@ -1,3 +1,4 @@
+import type { RequestStatus } from "app/app-reducer";
 import { TaskPriority, TaskStatus } from "../lib/enums/enums";
 
 export type DomainTask = {
